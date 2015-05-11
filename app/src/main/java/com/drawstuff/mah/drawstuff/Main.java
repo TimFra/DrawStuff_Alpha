@@ -1,9 +1,9 @@
 package com.drawstuff.mah.drawstuff;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,43 +14,29 @@ import android.widget.FrameLayout;
 import com.drawstuff.mah.drawstuff.Constants.Constants;
 import com.drawstuff.mah.drawstuff.Draw.DrawFragment;
 import com.drawstuff.mah.drawstuff.Draw.DrawingView;
+import com.drawstuff.mah.drawstuff.Draw.StartFragment;
+import com.firebase.client.Firebase;
 
 
-public class Main extends ActionBarActivity {
+public class Main extends Activity {
 
     private DrawingView mDrawingView;
+
     //final View drawView = (View) mDrawingView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-
-        final Button drawButton = (Button) findViewById(R.id.drawBtn);
-
-        drawButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                DrawFragment df = new DrawFragment();
-
-                //  Vägrar skifta till DrawFragment, error:
-                //  No view found for id 0x7f0c0051 (com.drawstuff.mah.drawstuff:id/drawfragment) for fragment DrawFragment{78c4b54 #0 id=0x7f0c0051}
-                ft.replace(R.id.drawfragment,df);
-
-                //setContentView(mDrawingView);
-                ft.commit();
-
-            }
-        });
-
-
-
-
+        setContentView(R.layout.activity_main);  //This is empty to makr place for fragments
+        //So put in the startfragment
+        Firebase.setAndroidContext(this);
+        if (savedInstanceState == null) {  //If savedInstanceState not is null then we already have the activity fx if we were interupted by a phonecall and  b
+            FragmentManager fm = getFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction(); //Start adding the fragment by getting the manager for handling this
+            StartFragment sf = new StartFragment(); //Create the fragment
+            ft.add(R.id.main_activity_container, sf); //And add it to the manager
+            ft.commit(); //OK go ahead do your transaction nothing really happens until here
         }
+    }
 
 
     @Override

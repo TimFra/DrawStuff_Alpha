@@ -43,7 +43,7 @@ public class DrawFragment extends Fragment implements ColorPickerDialog.OnColorC
 
         // Vi vill att den ska
         // setContentView(mDrawingView)
-        // vilket inte går i ett fragment, hur gör vi?
+        // vilket inte gr i ett fragment, hur gr vi?
 
 
         return inflater.inflate(R.layout.fragment_draw, container, false);
