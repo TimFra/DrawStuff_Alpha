@@ -46,7 +46,9 @@ public class DrawFragment extends Fragment implements ColorPickerDialog.OnColorC
         // vilket inte gr i ett fragment, hur gr vi?
 
 
-        return inflater.inflate(R.layout.fragment_draw, container, false);
+        //return inflater.inflate(R.layout.fragment_draw, container, false);
+        //Just return the view.........
+        return mDrawingView;
     }
 
 
